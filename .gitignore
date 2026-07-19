@@ -1,0 +1,16 @@
+# WordPress gitignore template
+# Ignore temporary system/editor files
+.DS_Store
+Thumbs.db
+*.log
+*.zip
+*.tar.gz
+
+# Node/npm files if any
+node_modules/
+npm-debug.log
+
+# VS Code / IDE configs
+.vscode/
+.idea/
+.git/

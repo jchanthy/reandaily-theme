@@ -1,0 +1,1968 @@
+/*
+Theme Name: ReanDaily Custom
+Description: Custom clean child theme for ReanDaily to replace Elementor headers.
+Author: ReanDaily
+Template: ms-lms-starter-theme
+Version: 1.0.1
+*/
+@import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,300..700;1,300..700&family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Sticky Header */
+#custom-header {
+    background-color: #ffffff !important; /* Premium White */
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    padding: 15px 0;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05) !important; /* Soft premium shadow */
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* Page Body Background */
+body {
+    background-color: #f8fafc !important; /* Premium clean off-white */
+}
+
+#custom-header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Global Font Override */
+body, html, p, span, a, button, input, select, textarea, h1, h2, h3, h4, h5, h6, 
+.btn, .button, .btn-enroll, .btn-cta, .enroll-page, .enroll-page *,
+.courses-archive-page, .courses-archive-page *, .archive-banner, .archive-banner *,
+.masterstudy-purchase-button, .masterstudy-buy-button, .stm-lms-wrapper, .stm-lms-wrapper * {
+    font-family: 'Kantumruy Pro', 'Inter', sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700 !important; /* Force bold weight */
+}
+
+#custom-header .logo a {
+    color: #0f172a; /* Dark Slate */
+    font-size: 28px;
+    font-weight: 800;
+    text-decoration: none;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    letter-spacing: -0.02em;
+}
+
+#custom-header .main-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 30px;
+}
+
+#custom-header .main-menu li a {
+    color: #475569; /* Slate Gray */
+    text-decoration: none;
+    font-weight: 700;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    position: relative;
+    padding-bottom: 5px;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+#custom-header .main-menu li a:hover {
+    color: #007bff; /* Vibrant Blue on hover */
+}
+
+/* Hover effect */
+#custom-header .main-menu li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: linear-gradient(135deg, #007bff 0%, #00f2fe 100%); /* Cool blue gradient */
+    transition: width 0.3s ease;
+    border-radius: 3px;
+}
+
+#custom-header .main-menu li a:hover::after {
+    width: 100%;
+}
+
+/* ==========================================================================
+   HOMEPAGE PREMIUM STYLING
+   ========================================================================= */
+
+/* Utility Buttons */
+.homepage .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.homepage .btn-primary {
+    background: linear-gradient(135deg, #007bff 0%, #00f2fe 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+}
+
+.homepage .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+}
+
+.homepage .btn-secondary {
+    background: transparent !important;
+    border: 2px solid #007bff !important;
+    color: #007bff !important;
+}
+
+.homepage .btn-secondary:hover {
+    background: rgba(0, 123, 255, 0.05) !important;
+    transform: translateY(-2px);
+}
+
+/* Sections Base */
+.homepage section {
+    padding: 80px 0;
+}
+
+.homepage .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.homepage .section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.homepage .section-title h2 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 12px;
+}
+
+.homepage .section-title p {
+    font-size: 18px;
+    color: #64748b;
+}
+
+/* 1. Hero Section */
+.hero-section {
+    background: radial-gradient(circle at 85% 10%, rgba(0, 242, 254, 0.1) 0%, rgba(255, 255, 255, 0) 60%);
+    overflow: hidden;
+}
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.hero-text {
+    flex: 1;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(0, 123, 255, 0.08);
+    color: #007bff;
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero-text h1 {
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1.25;
+    color: #0f172a;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+}
+
+.hero-text p {
+    font-size: 18px;
+    color: #475569;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.hero-ctas {
+    display: flex;
+    gap: 15px;
+}
+
+.hero-graphic {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Pure CSS premium graphic card */
+.graphic-card {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    padding: 20px;
+}
+
+.glow-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    height: 350px;
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.2) 0%, rgba(0, 242, 254, 0.2) 100%);
+    filter: blur(80px);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* Premium Dashboard Widget */
+.dashboard-widget {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    border-radius: 24px !important;
+    padding: 30px !important;
+    box-shadow: 0 30px 60px rgba(15, 23, 42, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+    width: 100%;
+}
+
+.widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.widget-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 0 rgba(16, 185, 129, 0.4);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+.widget-title h5 {
+    font-size: 15px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+}
+
+.widget-tag {
+    font-size: 11px;
+    font-weight: 700;
+    background: #e2e8f0;
+    color: #475569;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+}
+
+.widget-chart {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+    padding: 15px;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    margin-bottom: 20px;
+}
+
+.svg-chart {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.widget-footer {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgba(226, 232, 240, 0.8);
+    padding-top: 20px;
+}
+
+.footer-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #64748b;
+    font-weight: 600;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+}
+
+.stat-value {
+    font-size: 18px;
+    font-weight: 850;
+    color: #0f172a;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+}
+
+.text-green {
+    color: #10b981 !important;
+}
+
+/* 2. Stats Bar */
+.stats-section {
+    padding: 40px 0;
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-item h3 {
+    font-size: 40px;
+    font-weight: 950;
+    background: linear-gradient(135deg, #007bff 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 0 5px 0;
+    letter-spacing: -0.03em;
+}
+
+.stat-item p {
+    font-size: 16px;
+    color: #475569;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* 3. Categories Grid */
+.categories-section {
+    background: #f8fafc;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.category-card {
+    background: #ffffff;
+    padding: 35px 25px;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.02);
+    transition: all 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    border-color: #007bff;
+}
+
+.cat-icon {
+    font-size: 32px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.category-card h4 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 10px 0;
+}
+
+.category-card p {
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 4. Courses Grid */
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.course-card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.02);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+.course-image {
+    aspect-ratio: 16/10;
+    background: #f1f5f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.course-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.placeholder-img {
+    font-size: 64px;
+}
+
+.course-content {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.course-badge {
+    display: inline-block;
+    align-self: flex-start;
+    background: rgba(0, 123, 255, 0.08);
+    color: #007bff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 15px;
+}
+
+.course-title {
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.4;
+    margin: 0 0 15px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 50px;
+}
+
+.course-title a {
+    color: #0f172a;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.course-title a:hover {
+    color: #007bff;
+}
+
+.course-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 15px;
+    margin-top: auto;
+    margin-bottom: 20px;
+}
+
+.course-meta span {
+    font-size: 14px;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.course-meta .price {
+    font-size: 18px;
+    color: #007bff;
+    font-weight: 850;
+}
+
+.btn-enroll {
+    display: block;
+    text-align: center;
+    background: #f8fafc;
+    color: #007bff;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.btn-enroll:hover {
+    background: #007bff;
+    color: #ffffff;
+    border-color: #007bff;
+}
+
+/* 5. Features Grid */
+.features-section {
+    background: #ffffff;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 20px;
+}
+
+.feat-icon {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.feature-item h4 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 12px 0;
+}
+
+.feature-item p {
+    color: #64748b;
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* 6. Call to Action (CTA) Section */
+.cta-section {
+    background: #f8fafc;
+    padding: 40px 0 100px 0;
+}
+
+.cta-wrapper {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    padding: 60px 40px;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(0, 242, 254, 0.08) 0%, rgba(0,0,0,0) 70%);
+    border-radius: 50%;
+}
+
+.cta-wrapper h2 {
+    font-size: 36px;
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0 0 15px 0;
+    position: relative;
+    z-index: 2;
+    letter-spacing: -0.02em;
+}
+
+.cta-wrapper p {
+    font-size: 18px;
+    color: #94a3b8;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+    line-height: 1.7;
+    position: relative;
+    z-index: 2;
+}
+
+.btn-cta {
+    background: linear-gradient(135deg, #007bff 0%, #00f2fe 100%) !important;
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 16px 36px !important;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+.btn-cta:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.5);
+}
+
+/* Responsive Overrides */
+@media (max-width: 991px) {
+    .hero-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hero-ctas {
+        justify-content: center;
+    }
+    
+    .hero-text h1 {
+        font-size: 38px;
+    }
+    
+    .homepage section {
+        padding: 60px 0;
+    }
+    
+    .cta-wrapper {
+        padding: 40px 20px;
+    }
+    
+    .cta-wrapper h2 {
+        font-size: 28px;
+    }
+}
+
+/* Phone Responsive Overrides */
+@media (max-width: 480px) {
+    .hero-ctas {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 12px !important;
+    }
+    
+    .hero-ctas .btn {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+    
+    .hero-text h1 {
+        font-size: 32px !important;
+    }
+    
+    .hero-text p {
+        font-size: 16px !important;
+    }
+
+    /* CSS Dashboard Widget mobile adjustments */
+    .graphic-card {
+        padding: 10px 0 !important;
+        max-width: 340px !important;
+        margin: 0 auto !important;
+    }
+
+    .dashboard-widget {
+        padding: 20px !important;
+        border-radius: 16px !important;
+    }
+
+    .widget-title h5 {
+        font-size: 13px !important;
+    }
+
+    .stat-value {
+        font-size: 16px !important;
+    }
+}
+
+/* ==========================================================================
+   COURSES CATALOG ARCHIVE STYLING
+   ========================================================================= */
+
+.courses-archive-page {
+    background: #f8fafc;
+}
+
+/* Banner */
+.archive-banner {
+    background: radial-gradient(circle at 10% 90%, rgba(0, 123, 255, 0.05) 0%, rgba(255, 255, 255, 0) 50%),
+                radial-gradient(circle at 90% 10%, rgba(0, 242, 254, 0.05) 0%, rgba(255, 255, 255, 0) 50%),
+                #ffffff;
+    text-align: center;
+    padding: 60px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.banner-badge {
+    display: inline-block;
+    background: rgba(0, 123, 255, 0.08);
+    color: #007bff;
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.archive-banner h1 {
+    font-size: 36px;
+    font-weight: 900;
+    color: #0f172a;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+}
+
+.archive-banner p {
+    font-size: 18px;
+    color: #64748b;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Grid & Items */
+.archive-grid-section {
+    padding: 60px 0 100px 0;
+}
+
+.archive-courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+/* Pagination Styling */
+.archive-pagination {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.archive-pagination ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 8px;
+}
+
+.archive-pagination ul li a,
+.archive-pagination ul li span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    color: #475569;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.archive-pagination ul li a:hover {
+    border-color: #007bff;
+    color: #007bff;
+    transform: translateY(-1px);
+}
+
+.archive-pagination ul li span.current {
+    background: #007bff;
+    color: #ffffff;
+    border-color: #007bff;
+}
+
+/* Empty State Fallback */
+.no-courses-found {
+    text-align: center;
+    padding: 80px 40px;
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.02);
+}
+
+.no-courses-icon {
+    font-size: 64px;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.no-courses-found h2 {
+    font-size: 26px;
+    color: #0f172a;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.no-courses-found p {
+    color: #64748b;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* ==========================================================================
+   MASTERSTUDY CORE CATALOG OVERRIDES (PREMIUM STYLING)
+   ========================================================================= */
+
+/* Main layout wrapper */
+.stm_lms_courses_wrapper {
+    margin-top: 20px !important;
+}
+
+/* Horizontal Filters (Category tags, view switches, search) */
+.stm_lms_courses__filters {
+    background: #ffffff !important;
+    padding: 20px 25px !important;
+    border-radius: 16px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.02) !important;
+    margin-bottom: 30px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 15px !important;
+}
+
+.stm_lms_courses__filters .stm_lms_courses__filter_title {
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    font-size: 14px !important;
+    color: #475569 !important;
+    font-weight: 600 !important;
+}
+
+.stm_lms_courses__filters input[type="text"] {
+    border-radius: 8px !important;
+    border: 1px solid #cbd5e1 !important;
+    padding: 10px 16px !important;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    font-size: 14px !important;
+    color: #1e293b !important;
+    transition: all 0.3s ease !important;
+    background: #f8fafc !important;
+}
+
+.stm_lms_courses__filters input[type="text"]:focus {
+    border-color: #007bff !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1) !important;
+}
+
+/* Sidebar Advanced Filters (Categories, rating, price, etc.) */
+.stm_lms_courses__advanced_filters {
+    background: #ffffff !important;
+    padding: 30px 25px !important;
+    border-radius: 20px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03) !important;
+}
+
+.stm_lms_courses__advanced_filters h3, 
+.stm_lms_courses__advanced_filters h4,
+.stm_lms_courses__advanced_filters .filter_title {
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 800 !important;
+    color: #0f172a !important;
+    margin-bottom: 20px !important;
+    border-bottom: 2px solid #f1f5f9 !important;
+    padding-bottom: 10px !important;
+}
+
+/* Checkbox & radio styles in filters */
+.stm_lms_courses__advanced_filters input[type="checkbox"],
+.stm_lms_courses__advanced_filters input[type="radio"] {
+    accent-color: #007bff !important; /* Beautiful vibrant blue */
+    width: 16px !important;
+    height: 16px !important;
+    cursor: pointer !important;
+}
+
+.stm_lms_courses__advanced_filters label {
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    font-size: 14px !important;
+    color: #475569 !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: color 0.2s ease !important;
+}
+
+.stm_lms_courses__advanced_filters label:hover {
+    color: #007bff !important;
+}
+
+/* Course card styling override (Clean up card layout and heights) */
+.stm_lms_courses__single {
+    background: #ffffff !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.02) !important;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    margin-bottom: 30px !important;
+}
+
+.stm_lms_courses__single:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08) !important;
+    border-color: #007bff !important;
+}
+
+/* Ensure inner content of course card handles dynamic heights gracefully */
+.stm_lms_courses__single--inner {
+    padding: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+    justify-content: space-between !important;
+}
+
+/* Course card title inside MasterStudy */
+.stm_lms_courses__single--title h5,
+.stm_lms_courses__single--title h4,
+.stm_lms_courses__single .course_title {
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    color: #0f172a !important;
+    line-height: 1.5 !important;
+    margin: 10px 0 !important;
+    height: auto !important; /* Allow variable text height without dropping */
+    transition: color 0.2s ease !important;
+}
+
+.stm_lms_courses__single:hover .stm_lms_courses__single--title h5 {
+    color: #007bff !important;
+}
+
+/* Course Meta (Author, rating, price) */
+.stm_lms_courses__single--meta {
+    border-top: 1px solid #f1f5f9 !important;
+    padding-top: 12px !important;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+}
+
+.stm_lms_courses__single--price .price {
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    font-weight: 850 !important;
+    color: #007bff !important;
+    font-size: 18px !important;
+}
+
+/* MasterStudy LMS Button */
+.stm_lms_courses__single .btn-enroll,
+.stm_lms_courses__single .btn,
+.stm_lms_courses__single button {
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    font-weight: 700 !important;
+    background: #f8fafc !important;
+    color: #007bff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 10px !important;
+    transition: all 0.2s ease !important;
+}
+
+.stm_lms_courses__single:hover .btn-enroll,
+.stm_lms_courses__single:hover .btn {
+    background: #007bff !important;
+    color: #ffffff !important;
+    border-color: #007bff !important;
+}
+
+/* ==========================================================================
+   ENROLLMENT PAGE & KHQR PAYMENT SYSTEM
+   ========================================================================= */
+
+/* ── Page Layout ── */
+.enroll-page { background: #f8fafc; min-height: 100vh; }
+
+.enroll-banner {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+    padding: 50px 20px;
+    text-align: center;
+}
+.enroll-banner .banner-badge {
+    background: rgba(0,123,255,0.2);
+    color: #60a5fa;
+    border: 1px solid rgba(96,165,250,0.3);
+}
+.enroll-banner h1 {
+    font-size: 28px;
+    font-weight: 900;
+    color: #ffffff;
+    margin: 15px 0 0;
+    letter-spacing: -0.02em;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+}
+
+.enroll-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 50px 20px 100px;
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* ── Course Info Card (left) ── */
+.enroll-course-card {
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 40px rgba(15,23,42,0.06);
+    overflow: hidden;
+    position: sticky;
+    top: 120px;
+}
+.course-thumb {
+    position: relative;
+    aspect-ratio: 16/10;
+    background: #f1f5f9;
+    overflow: hidden;
+}
+.course-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+.course-thumb-placeholder {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 64px; height: 100%;
+}
+.price-badge {
+    position: absolute;
+    top: 12px; right: 12px;
+    background: #007bff;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 16px;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+}
+.free-badge { background: #10b981 !important; }
+
+.course-info-body { padding: 22px; }
+.course-info-body h2 {
+    font-size: 16px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 18px;
+    line-height: 1.45;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+}
+.course-info-rows { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+.info-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #475569;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+}
+.info-icon { font-size: 16px; }
+.info-label { flex: 1; font-weight: 600; }
+.info-val { font-weight: 700; color: #0f172a; }
+.view-course-link {
+    display: block;
+    text-align: center;
+    color: #007bff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 10px;
+    border: 1px solid #dbeafe;
+    border-radius: 8px;
+    background: #eff6ff;
+    transition: all 0.2s ease;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+}
+.view-course-link:hover { background: #007bff; color: #ffffff; border-color: #007bff; }
+
+/* ── Form Wrapper (right) ── */
+.enroll-form-wrapper {
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 40px rgba(15,23,42,0.06);
+    padding: 40px;
+}
+
+/* ── Step indicators ── */
+.step-header { margin-bottom: 32px; }
+.step-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 20px;
+}
+.step-dot {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    color: #94a3b8;
+    font-weight: 800;
+    font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+.step-dot.active {
+    background: #007bff; color: #ffffff;
+    border-color: #007bff;
+    box-shadow: 0 0 0 6px rgba(0,123,255,0.12);
+}
+.step-dot.done {
+    background: #10b981; color: #ffffff;
+    border-color: #10b981;
+}
+.step-dot.hidden { display: none !important; }
+.step-line {
+    flex: 1; height: 2px;
+    background: #e2e8f0;
+    transition: background 0.3s ease;
+}
+.step-line.done { background: #10b981; }
+.step-line.free { display: none; }
+.step-title {
+    font-size: 22px;
+    font-weight: 900;
+    color: #0f172a;
+    margin: 0;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+}
+
+/* ── Enrollment step visibility ── */
+.enroll-step { display: none; }
+.enroll-step.active { display: block; animation: fadeSlide 0.3s ease; }
+.enroll-step.hidden { display: none; }
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Form fields ── */
+.form-group { margin-bottom: 22px; }
+.form-group label {
+    display: block;
+    font-weight: 700;
+    font-size: 14px;
+    color: #334155;
+    margin-bottom: 8px;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+}
+.form-group .req { color: #ef4444; }
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #0f172a;
+    background: #f8fafc;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    transition: all 0.25s ease;
+    box-sizing: border-box;
+}
+.form-group input:focus {
+    outline: none;
+    border-color: #007bff;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(0,123,255,0.1);
+}
+.form-group small {
+    display: block;
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 6px;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+}
+.form-group small a { color: #007bff; }
+
+/* ── Buttons ── */
+.btn-enroll-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #007bff 0%, #0051cc 100%);
+    color: #ffffff !important;
+    font-weight: 800;
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    text-decoration: none !important;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    transition: all 0.25s ease;
+    box-shadow: 0 6px 20px rgba(0,123,255,0.25);
+}
+.btn-enroll-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0,123,255,0.4);
+}
+.btn-enroll-submit:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+.btn-loader { font-size: 18px; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.btn-back {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 12px;
+    padding: 12px;
+    background: transparent;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    color: #64748b;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    transition: all 0.2s ease;
+}
+.btn-back:hover { border-color: #007bff; color: #007bff; }
+
+/* ── Error box ── */
+.form-error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+}
+
+/* ── KHQR Payment Box ── */
+.khqr-payment-box {
+    background: linear-gradient(160deg, #f0f9ff 0%, #fafafa 100%);
+    border: 1.5px solid #bfdbfe;
+    border-radius: 16px;
+    padding: 28px;
+    text-align: center;
+}
+.bank-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+.bank-logo-badge {
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+.bank-logo-badge.aba   { background: #1e40af; color: #fff; }
+.bank-logo-badge.acleda { background: #7c3aed; color: #fff; }
+.bank-logo-badge.wing  { background: #059669; color: #fff; }
+.bank-logo-badge.bakong { background: #dc2626; color: #fff; }
+.bank-more { font-size: 12px; color: #94a3b8; font-weight: 600; }
+
+.payment-amount { margin-bottom: 22px; }
+.amount-label {
+    font-size: 13px;
+    color: #64748b;
+    font-weight: 600;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    margin-bottom: 4px;
+}
+.amount-value {
+    font-size: 38px;
+    font-weight: 900;
+    color: #0f172a;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    font-family: 'Outfit', sans-serif !important;
+}
+.amount-currency {
+    font-size: 13px;
+    color: #007bff;
+    font-weight: 700;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    margin-top: 4px;
+}
+
+/* QR Frame */
+.qr-wrapper { margin: 0 auto 20px; display: inline-block; }
+.qr-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 40px;
+    color: #64748b;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    font-size: 14px;
+}
+.qr-spinner {
+    width: 40px; height: 40px;
+    border: 3px solid #e2e8f0;
+    border-top-color: #007bff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+.qr-frame {
+    position: relative;
+    padding: 14px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(15,23,42,0.12);
+    display: inline-block;
+}
+.qr-corner {
+    position: absolute;
+    width: 20px; height: 20px;
+    border-color: #007bff;
+    border-style: solid;
+}
+.qr-corner.tl { top: 6px; left: 6px;   border-width: 3px 0 0 3px; border-radius: 4px 0 0 0; }
+.qr-corner.tr { top: 6px; right: 6px;  border-width: 3px 3px 0 0; border-radius: 0 4px 0 0; }
+.qr-corner.bl { bottom: 6px; left: 6px;  border-width: 0 0 3px 3px; border-radius: 0 0 0 4px; }
+.qr-corner.br { bottom: 6px; right: 6px; border-width: 0 3px 3px 0; border-radius: 0 0 4px 0; }
+.qr-brand {
+    margin-top: 10px;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.qr-brand img { height: 22px; }
+
+/* Payment Steps */
+.payment-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+    margin-bottom: 18px;
+}
+.pay-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+.pay-step-num {
+    width: 26px; height: 26px;
+    background: #007bff;
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+.pay-step-text {
+    font-size: 13px;
+    color: #475569;
+    font-weight: 600;
+    line-height: 1.5;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+}
+
+/* QR Timer */
+.qr-timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #64748b;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    background: #f1f5f9;
+    padding: 8px 16px;
+    border-radius: 50px;
+}
+.qr-timer strong { color: #007bff; }
+
+/* ── Success state ── */
+.enroll-success-box {
+    text-align: center;
+    padding: 20px 10px;
+    animation: fadeSlide 0.4s ease;
+}
+.success-anim { margin-bottom: 20px; }
+.success-circle {
+    width: 80px; height: 80px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10b981, #059669);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 30px rgba(16,185,129,0.35);
+    animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+.checkmark-svg { width: 44px; height: 44px; }
+.checkmark-circle {
+    stroke: rgba(255,255,255,0.35);
+    stroke-width: 2;
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    animation: strokeDash 0.6s ease 0.3s forwards;
+}
+.checkmark-check {
+    stroke: #ffffff;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: strokeDash 0.4s ease 0.7s forwards;
+}
+@keyframes strokeDash {
+    to { stroke-dashoffset: 0; }
+}
+.enroll-success-box h2 {
+    font-size: 24px;
+    font-weight: 900;
+    color: #0f172a;
+    margin: 0 0 12px;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+}
+.enroll-success-box p {
+    font-size: 15px;
+    color: #475569;
+    margin-bottom: 28px;
+    line-height: 1.6;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+}
+.success-icon { font-size: 64px; display: block; margin-bottom: 12px; animation: bounce 0.6s ease; }
+@keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+/* ── Hidden utility ── */
+.hidden { display: none !important; }
+
+/* ── ABA PayWay tap button (mobile users) ── */
+.btn-aba-tap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    margin: 14px 0 4px;
+    padding: 14px 18px;
+    background: linear-gradient(135deg, #c8102e 0%, #a30d25 100%);
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 15px;
+    border-radius: 12px;
+    text-decoration: none !important;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    transition: all 0.25s ease;
+    box-shadow: 0 6px 20px rgba(200,16,46,0.25);
+    box-sizing: border-box;
+}
+.btn-aba-tap:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(200,16,46,0.4);
+    color: #ffffff !important;
+}
+.btn-aba-tap .aba-icon { font-size: 18px; }
+.btn-aba-tap .aba-arrow {
+    font-size: 20px;
+    font-weight: 300;
+    opacity: 0.7;
+}
+
+/* ── Free Learning Highlight Section ── */
+.free-learning-section {
+    padding: 60px 0;
+    background-color: #f8fafc;
+}
+.free-learning-card {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border-radius: 24px;
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+.free-learning-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(0, 123, 255, 0.15) 0%, rgba(0, 242, 254, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+.free-learning-content {
+    flex: 1.2;
+    z-index: 2;
+}
+.free-badge-glow {
+    display: inline-block;
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+.free-learning-content h2 {
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 16px;
+}
+.free-learning-content p {
+    color: #94a3b8;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+.btn-free-start {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 12px;
+    text-decoration: none !important;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+}
+.btn-free-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.5);
+}
+.free-learning-visual {
+    flex: 0.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+.gift-box-wrapper {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    width: 100%;
+    max-width: 320px;
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+.gift-icon {
+    font-size: 64px;
+    margin-bottom: 15px;
+    animation: pulseGift 2s infinite ease-in-out;
+}
+@keyframes pulseGift {
+    0%, 100% { transform: scale(1) translateY(0); }
+    50% { transform: scale(1.08) translateY(-5px); }
+}
+.gift-glow {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    background: rgba(16, 185, 129, 0.3);
+    filter: blur(25px);
+    border-radius: 50%;
+    z-index: -1;
+}
+.features-mini-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+    margin-top: 15px;
+}
+.mini-feat {
+    color: #e2e8f0;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* ── Premium Footer Styling ── */
+.premium-footer {
+    background-color: #0f172a !important; /* Elegant Dark Slate */
+    color: #94a3b8;
+    padding: 60px 0 0;
+    margin-top: 80px;
+    border-top: 1px solid #1e293b;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+}
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding-bottom: 40px;
+}
+.footer-brand {
+    flex: 1.2;
+    min-width: 280px;
+}
+.footer-logo {
+    color: #ffffff !important;
+    font-size: 28px;
+    font-weight: 800;
+    text-decoration: none !important;
+    display: inline-block;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+}
+.footer-tagline {
+    color: #94a3b8;
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+}
+.footer-socials {
+    flex: 0.8;
+    min-width: 250px;
+}
+.social-title {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 20px;
+}
+.social-icons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none !important;
+    transition: all 0.25s ease;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.social-btn .icon {
+    font-size: 16px;
+}
+/* Telegram Button styling */
+.social-btn.telegram {
+    background: rgba(36, 161, 222, 0.08);
+    color: #24a1de !important;
+    border-color: rgba(36, 161, 222, 0.2);
+}
+.social-btn.telegram:hover {
+    background: #24a1de;
+    color: #ffffff !important;
+    box-shadow: 0 8px 20px rgba(36, 161, 222, 0.35);
+    transform: translateY(-2px);
+}
+/* Facebook Button styling */
+.social-btn.facebook {
+    background: rgba(24, 119, 242, 0.08);
+    color: #1877f2 !important;
+    border-color: rgba(24, 119, 242, 0.2);
+}
+.social-btn.facebook:hover {
+    background: #1877f2;
+    color: #ffffff !important;
+    box-shadow: 0 8px 20px rgba(24, 119, 242, 0.35);
+    transform: translateY(-2px);
+}
+/* YouTube Button styling */
+.social-btn.youtube {
+    background: rgba(255, 0, 0, 0.08);
+    color: #ff0000 !important;
+    border-color: rgba(255, 0, 0, 0.2);
+}
+.social-btn.youtube:hover {
+    background: #ff0000;
+    color: #ffffff !important;
+    box-shadow: 0 8px 20px rgba(255, 0, 0, 0.35);
+    transform: translateY(-2px);
+}
+/* Footer Copyright Bottom section */
+.footer-bottom {
+    background-color: #020617; /* Very Dark blue */
+    padding: 24px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    text-align: center;
+}
+.footer-bottom p {
+    margin: 0;
+    font-size: 14px;
+    color: #64748b;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .free-learning-card {
+        flex-direction: column;
+        padding: 35px 25px;
+        text-align: center;
+    }
+    .features-mini-list {
+        align-items: center;
+    }
+    .enroll-container {
+        grid-template-columns: 1fr;
+    }
+    .enroll-course-card {
+        position: relative;
+        top: 0;
+    }
+    .footer-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+}
+@media (max-width: 600px) {
+    .free-learning-content h2 { font-size: 24px; }
+    .free-learning-content p { font-size: 14px; }
+    .enroll-form-wrapper { padding: 24px 18px; }
+    .amount-value { font-size: 28px; }
+    .enroll-banner h1 { font-size: 22px; }
+}
+
+/* ── Premium Custom Header & User Profile Overrides ── */
+#custom-header .logo img,
+#custom-header .logo .custom-logo-link img {
+    max-height: 48px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+}
+#custom-header .custom-logo-link {
+    display: inline-block;
+}
+#custom-header .header-right {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+}
+#custom-header .header-auth-wrap {
+    display: flex;
+    align-items: center;
+}
+#custom-header .header-auth-wrap .ms-lms-authorization {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none !important;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    font-weight: 700;
+    color: #475569 !important;
+    font-size: 14px;
+    background: #f1f5f9;
+    padding: 8px 16px;
+    border-radius: 30px;
+    transition: all 0.25s ease;
+    border: 1px solid #e2e8f0;
+}
+#custom-header .header-auth-wrap .ms-lms-authorization:hover {
+    color: #ffffff !important;
+    background: #007bff;
+    border-color: #007bff;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+}
+#custom-header .header-auth-wrap .ms-lms-authorization a,
+#custom-header .header-auth-wrap .ms-lms-authorization span,
+#custom-header .header-auth-wrap .ms-lms-authorization i {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+#custom-header .header-auth-wrap .ms-lms-authorization i {
+    font-size: 13px;
+    margin-right: 4px;
+}
+
+/* MasterStudy native profile menu alignments & styling */
+#custom-header .header-auth-wrap .stm_lms_account_dropdown .dropdown button {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    background: #f1f5f9 !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 30px !important;
+    padding: 8px 16px !important;
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    font-weight: 700 !important;
+    color: #475569 !important;
+    font-size: 14px !important;
+    transition: all 0.25s ease !important;
+    height: auto !important;
+    line-height: normal !important;
+    cursor: pointer !important;
+    box-shadow: none !important;
+}
+#custom-header .header-auth-wrap .stm_lms_account_dropdown .dropdown button:hover {
+    background: #007bff !important;
+    border-color: #007bff !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2) !important;
+}
+#custom-header .header-auth-wrap .stm_lms_account_dropdown .dropdown button i,
+#custom-header .header-auth-wrap .stm_lms_account_dropdown .dropdown button span {
+    color: inherit !important;
+}
+#custom-header .header-auth-wrap .stm_lms_account_dropdown .dropdown button span.caret {
+    border-top-color: currentColor !important;
+    border-bottom-color: currentColor !important;
+}
+#custom-header .header-auth-wrap .stm-lms-user {
+    position: relative;
+}
+#custom-header .header-auth-wrap .stm-lms-user__avatar img {
+    border-radius: 50%;
+    border: 2px solid #e2e8f0;
+    transition: border-color 0.25s ease;
+}
+#custom-header .header-auth-wrap .stm-lms-user:hover .stm-lms-user__avatar img {
+    border-color: #007bff;
+}
+
+/* ── Premium Footer Overrides ── */
+.premium-footer .footer-logo-img {
+    max-height: 42px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+    margin-bottom: 15px;
+    filter: brightness(0) invert(1); /* Keep rectangular logo white in dark footer */
+}
+.premium-footer .footer-logo-img-wrap {
+    display: inline-block;
+}
+.footer-bottom-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.footer-copyright {
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    font-size: 14px;
+    color: #64748b;
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+}
+.footer-copyright .site-name-highlight {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* Responsive navigation adjustments */
+@media (max-width: 991px) {
+    #custom-header .header-right {
+        gap: 20px;
+    }
+    #custom-header .main-menu {
+        gap: 15px;
+    }
+    #custom-header .main-menu li a {
+        font-size: 15px;
+    }
+}
+
+/* Hide payment app buttons on desktop screens since they only work on mobile devices */
+@media (min-width: 768px) {
+    .payment-app-buttons {
+        display: none !important;
+    }
+}
+

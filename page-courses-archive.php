@@ -8,7 +8,19 @@
 get_header(); 
 
 // 1. Setup Query Parameters
-$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+$paged = 1;
+if ( isset( $_GET['paged'] ) ) {
+    $paged = max( 1, intval( $_GET['paged'] ) );
+} else {
+    $request_path = trim( parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ), '/' );
+    if ( preg_match( '#/page/(\d+)/?$#', '/' . $request_path, $page_matches ) ) {
+        $paged = max( 1, intval( $page_matches[1] ) );
+    } elseif ( get_query_var( 'paged' ) ) {
+        $paged = get_query_var( 'paged' );
+    } elseif ( get_query_var( 'page' ) ) {
+        $paged = get_query_var( 'page' );
+    }
+}
 $category_filter = isset( $_GET['category'] ) ? sanitize_text_field( $_GET['category'] ) : '';
 
 $args = array(
@@ -118,10 +130,14 @@ $courses_query = new WP_Query( $args );
                 <?php
                 $total_pages = $courses_query->max_num_pages;
                 if ( $total_pages > 1 ) {
+                    $current_path = strtok( $_SERVER['REQUEST_URI'], '?' );
+                    $base_url = home_url( $current_path );
+                    $pagination_base = add_query_arg( 'paged', '%#%', $base_url );
+
                     echo '<div class="archive-pagination" style="margin-top: 50px; display: flex; justify-content: center; gap: 8px;">';
                     echo paginate_links( array(
-                        'base'      => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
-                        'format'    => '?paged=%#%',
+                        'base'      => esc_url( $pagination_base ),
+                        'format'    => '',
                         'current'   => max( 1, $paged ),
                         'total'     => $total_pages,
                         'prev_text' => '«',

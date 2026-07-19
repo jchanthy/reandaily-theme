@@ -8,16 +8,18 @@
 get_header(); 
 
 // 1. Setup Query Parameters
-// For virtual pages not registered as WP Pages, extract page number from URL path
-// e.g. /courses/page/2/ => paged = 2
 $paged = 1;
-$request_path = trim( parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ), '/' );
-if ( preg_match( '#/page/(\d+)/?$#', '/' . $request_path, $page_matches ) ) {
-    $paged = max( 1, intval( $page_matches[1] ) );
-} elseif ( get_query_var( 'paged' ) ) {
-    $paged = get_query_var( 'paged' );
-} elseif ( get_query_var( 'page' ) ) {
-    $paged = get_query_var( 'page' );
+if ( isset( $_GET['paged'] ) ) {
+    $paged = max( 1, intval( $_GET['paged'] ) );
+} else {
+    $request_path = trim( parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ), '/' );
+    if ( preg_match( '#/page/(\d+)/?$#', '/' . $request_path, $page_matches ) ) {
+        $paged = max( 1, intval( $page_matches[1] ) );
+    } elseif ( get_query_var( 'paged' ) ) {
+        $paged = get_query_var( 'paged' );
+    } elseif ( get_query_var( 'page' ) ) {
+        $paged = get_query_var( 'page' );
+    }
 }
 
 $category_filter = isset( $_GET['category'] ) ? sanitize_text_field( $_GET['category'] ) : '';
@@ -160,30 +162,26 @@ $courses_query = new WP_Query( $args );
                 
                 <!-- Custom Snappy Pagination -->
                 <?php
-                $total_pages = $courses_query->max_num_pages;
-                if ( $total_pages > 1 ) {
-                    // Build the base URL for pretty /all-courses/page/%#%/ pagination
-                    $courses_base_url = home_url( '/all-courses/' );
-                    $pagination_base = $courses_base_url;
-                    if ( ! empty( $category_filter ) ) {
-                        $pagination_base = add_query_arg( 'category', $category_filter, $pagination_base );
-                    }
-                    if ( ! empty( $price_filter ) ) {
-                        $pagination_base = add_query_arg( 'price', $price_filter, $pagination_base );
-                    }
-                    $pagination_base = rtrim( $pagination_base, '/' ) . '/page/%#%/';
-                    echo '<div class="archive-pagination" style="margin-top: 50px; display: flex; justify-content: center; gap: 8px;">';
-                    echo paginate_links( array(
-                        'base'      => $pagination_base,
-                        'format'    => '',
-                        'current'   => max( 1, $paged ),
-                        'total'     => $total_pages,
-                        'prev_text' => '«',
-                        'next_text' => '»',
-                        'type'      => 'list',
-                    ) );
-                    echo '</div>';
-                }
+                 $total_pages = $courses_query->max_num_pages;
+                 if ( $total_pages > 1 ) {
+                     // Build the base URL with query variables for standard pagination compatibility
+                     $current_url = home_url( $_SERVER['REQUEST_URI'] );
+                     $current_url = remove_query_arg( 'paged', $current_url ); // Clear any existing page pointer
+                     
+                     $pagination_base = add_query_arg( 'paged', '%#%', $current_url );
+                     
+                     echo '<div class="archive-pagination" style="margin-top: 50px; display: flex; justify-content: center; gap: 8px;">';
+                     echo paginate_links( array(
+                         'base'      => esc_url( $pagination_base ),
+                         'format'    => '',
+                         'current'   => max( 1, $paged ),
+                         'total'     => $total_pages,
+                         'prev_text' => '«',
+                         'next_text' => '»',
+                         'type'      => 'list',
+                     ) );
+                     echo '</div>';
+                 }
                 ?>
             </div>
             

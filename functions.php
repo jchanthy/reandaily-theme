@@ -1646,3 +1646,120 @@ add_action( 'wp_footer', function() {
     </script>
     <?php
 } );
+
+
+// ============================================================
+// DYNAMIC GITHUB AUTOPILOT UPDATER FOR PRIVATE THEME REPOSITORY
+// ============================================================
+class Reandaily_Theme_Github_Updater {
+    private $theme_slug;
+    private $current_version;
+    private $github_username;
+    private $github_repo;
+    private $github_token;
+    private $github_api_url;
+
+    public function __construct() {
+        $this->theme_slug      = 'reandaily-theme'; // Must match your active folder name on production
+        $this->github_username = 'jchanthy';
+        $this->github_repo     = 'reandaily-theme';
+        
+        // Define GitHub Personal Access Token safely
+        $this->github_token    = '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W2Q1'; // Temporary replacement placeholder, override this via wp-config or filter
+        if ( defined( 'REANDAILY_GITHUB_TOKEN' ) ) {
+            $this->github_token = REANDAILY_GITHUB_TOKEN;
+        }
+
+        // Get local version
+        $theme = wp_get_theme( $this->theme_slug );
+        $this->current_version = $theme->exists() ? $theme->get( 'Version' ) : '1.0.0';
+
+        $this->github_api_url = "https://api.github.com/repos/{$this->github_username}/{$this->github_repo}";
+
+        // Hook into WordPress theme updates transient
+        add_filter( 'pre_set_site_transient_update_themes', array( $this, 'check_for_theme_update' ) );
+        add_filter( 'upgrader_pre_download', array( $this, 'authenticate_github_zip_download' ), 10, 3 );
+        add_action( 'upgrader_process_complete', array( $this, 'clear_theme_update_cache' ), 10, 2 );
+    }
+
+    /**
+     * Check GitHub for newer theme versions
+     */
+    public function check_for_theme_update( $transient ) {
+        if ( empty( $transient->checked ) ) {
+            return $transient;
+        }
+
+        // Fetch style.css file content from the GitHub repository main branch
+        $style_css_url = "https://raw.githubusercontent.com/{$this->github_username}/{$this->github_repo}/main/style.css";
+        
+        $args = array(
+            'headers' => array(
+                'Authorization' => 'token ' . $this->github_token,
+                'Accept'        => 'application/vnd.github.v3.raw',
+                'User-Agent'    => 'WordPress-Theme-Updater'
+            ),
+            'timeout' => 15
+        );
+
+        $response = wp_remote_get( $style_css_url, $args );
+
+        if ( is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) !== 200 ) {
+            return $transient;
+        }
+
+        $style_content = wp_remote_retrieve_body( $response );
+        
+        // Extract version from CSS header using regex
+        if ( preg_match( '/Version:\s*([0-9\.]+)/i', $style_content, $matches ) ) {
+            $remote_version = trim( $matches[1] );
+
+            // If a newer version exists, register it in WP transient
+            if ( version_compare( $this->current_version, $remote_version, '<' ) ) {
+                $zip_url = "https://api.github.com/repos/{$this->github_username}/{$this->github_repo}/zipball/main";
+
+                $transient->response[ $this->theme_slug ] = array(
+                    'theme'       => $this->theme_slug,
+                    'new_version' => $remote_version,
+                    'url'         => "https://github.com/{$this->github_username}/{$this->github_repo}",
+                    'package'     => $zip_url,
+                );
+            }
+        }
+
+        return $transient;
+    }
+
+    /**
+     * Authenticate and inject headers into WP zip download requests pointing to GitHub
+     */
+    public function authenticate_github_zip_download( $reply, $package, $upgrader ) {
+        // Validate if this request points to our specific private GitHub repo zip archive
+        if ( strpos( $package, "api.github.com/repos/{$this->github_username}/{$this->github_repo}" ) !== false ) {
+            
+            $temp_file = download_url( $package, 300, array(
+                'headers' => array(
+                    'Authorization' => 'token ' . $this->github_token,
+                    'User-Agent'    => 'WordPress-Theme-Updater'
+                )
+            ) );
+
+            if ( ! is_wp_error( $temp_file ) ) {
+                return $temp_file;
+            }
+        }
+        return $reply;
+    }
+
+    /**
+     * Clear update cache transient upon completion
+     */
+    public function clear_theme_update_cache( $upgrader, $options ) {
+        if ( isset( $options['action'] ) && $options['action'] === 'update' && $options['type'] === 'theme' ) {
+            delete_site_transient( 'update_themes' );
+        }
+    }
+}
+
+// Initialize Custom Updater
+new Reandaily_Theme_Github_Updater();

@@ -1660,7 +1660,8 @@ class Reandaily_Theme_Github_Updater {
     private $github_api_url;
 
     public function __construct() {
-        $this->theme_slug      = 'reandaily-theme'; // Must match your active folder name on production
+        // Get active stylesheet directory slug dynamically (e.g. 'reandaily-theme' or 'reandaily-theme-flat')
+        $this->theme_slug      = get_stylesheet();
         $this->github_username = 'jchanthy';
         $this->github_repo     = 'reandaily-theme';
         

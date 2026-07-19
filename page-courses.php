@@ -164,11 +164,10 @@ $courses_query = new WP_Query( $args );
                 <?php
                  $total_pages = $courses_query->max_num_pages;
                  if ( $total_pages > 1 ) {
-                     // Build the base URL with query variables for standard pagination compatibility
-                     $current_url = home_url( $_SERVER['REQUEST_URI'] );
-                     $current_url = remove_query_arg( 'paged', $current_url ); // Clear any existing page pointer
-                     
-                     $pagination_base = add_query_arg( 'paged', '%#%', $current_url );
+                     // Build base URL cleanly using home_url and current page path (excluding parameters)
+                     $current_path = strtok( $_SERVER['REQUEST_URI'], '?' );
+                     $base_url = home_url( $current_path );
+                     $pagination_base = add_query_arg( 'paged', '%#%', $base_url );
                      
                      echo '<div class="archive-pagination" style="margin-top: 50px; display: flex; justify-content: center; gap: 8px;">';
                      echo paginate_links( array(

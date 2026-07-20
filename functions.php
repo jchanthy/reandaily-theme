@@ -1419,7 +1419,12 @@ function reandaily_force_courses_templates( $template ) {
     if ( $first_slug === 'courses-archive' ) {
         $clean_segments = array_values(array_filter($path_parts));
         if ( count( $clean_segments ) > 1 ) {
-            return $template; // Do not override if it is a single course detail page
+            // EXCEPTION FOR PAGINATION: If second parameter is page or paged, allow loading template
+            if ( isset($clean_segments[1]) && ( $clean_segments[1] === 'page' || $clean_segments[1] === 'paged' ) ) {
+                // Do nothing, let it load
+            } else {
+                return $template; // Do not override if it is a single course details page
+            }
         }
         $new_template = locate_template( array( 'page-courses-archive.php' ) );
         if ( ! empty( $new_template ) ) {

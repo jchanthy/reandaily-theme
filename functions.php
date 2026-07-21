@@ -522,7 +522,7 @@ function reandaily_get_bakong_id_fallback() {
     }
     
     // Set fallback to your personal ABA account details
-    return '012572771@aba';
+    return '008668510@aba';
 }
 
 /**
@@ -1428,7 +1428,7 @@ function reandaily_redirect_checkout_to_custom_enroll() {
         return;
     }
 
-    $use_custom_enroll = get_theme_mod( 'reandaily_use_custom_enroll', false );
+    $use_custom_enroll = get_theme_mod( 'reandaily_use_custom_enroll', true );
     if ( ! $use_custom_enroll ) {
         return;
     }
@@ -1729,9 +1729,9 @@ class Reandaily_KHQR_Generator {
         $payload .= self::emv_tag( 1, '12' );
 
         // 30. Merchant Account Information (Bakong specific format for ABA Bank Account)
-        // For ABA Bank: acquire ID = "aba", account ID = "012572771"
+        // For ABA Bank: acquire ID = "aba", account ID = "008668510"
         $merchant_info = self::emv_tag( 0, 'aba' ); // Global Bank code identifier
-        $merchant_info .= self::emv_tag( 1, '012572771' ); // ABA Account ID
+        $merchant_info .= self::emv_tag( 1, '008668510' ); // ABA Account ID
         $payload .= self::emv_tag( 30, $merchant_info );
 
         // 52. Merchant Category Code (8299 = Schools/Education Services)
@@ -1749,7 +1749,7 @@ class Reandaily_KHQR_Generator {
         $payload .= self::emv_tag( 58, 'KH' );
 
         // 59. Merchant Name
-        $payload .= self::emv_tag( 59, 'JOHN Chanthy' );
+        $payload .= self::emv_tag( 59, 'MENG HANN AND JOHN CHANTHY' );
 
         // 60. Merchant City
         $payload .= self::emv_tag( 60, 'Phnom Penh' );

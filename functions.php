@@ -521,68 +521,8 @@ function reandaily_get_bakong_id_fallback() {
         return $bakong_id;
     }
     
-    // Fallback to WooCommerce BACS account
-    if ( empty( $bakong_id ) ) {
-        $bacs_accounts = get_option( 'woocommerce_bacs_accounts' );
-        if ( empty( $bacs_accounts ) ) {
-            $bacs_accounts = get_option( 'bacs_accounts' );
-        }
-        if ( ! empty( $bacs_accounts ) && is_array( $bacs_accounts ) ) {
-            $first_account = reset( $bacs_accounts );
-            if ( ! empty( $first_account ) && ! empty( $first_account['account_number'] ) ) {
-                $acc_num = trim( $first_account['account_number'] );
-                $bank_name = isset( $first_account['bank_name'] ) ? strtolower( $first_account['bank_name'] ) : '';
-                $sort_code = isset( $first_account['sort_code'] ) ? strtolower( $first_account['sort_code'] ) : '';
-                
-                // Determine suffix
-                $suffix = '';
-                if ( strpos( $bank_name, 'advanced bank of asia' ) !== false || strpos( $bank_name, 'aba' ) !== false || $sort_code === 'aba' ) {
-                    $suffix = 'aba';
-                } elseif ( strpos( $bank_name, 'acleda' ) !== false || $sort_code === 'acleda' ) {
-                    $suffix = 'acleda';
-                } elseif ( strpos( $bank_name, 'wing' ) !== false || $sort_code === 'wing' ) {
-                    $suffix = 'wing';
-                } elseif ( strpos( $bank_name, 'canadia' ) !== false || $sort_code === 'canadia' ) {
-                    $suffix = 'canadia';
-                }
-                
-                if ( ! empty( $suffix ) ) {
-                    $bakong_id = $acc_num . '@' . $suffix;
-                } else {
-                    $bakong_id = $acc_num . '@aba'; // Default fallback
-                }
-            }
-        }
-    }
-    
-    // Fallback to MasterStudy LMS Wire Transfer settings
-    if ( empty( $bakong_id ) ) {
-        $lms_settings = get_option( 'stm_lms_settings' );
-        if ( ! empty( $lms_settings ) && isset( $lms_settings['payment_methods']['wire_transfer']['fields'] ) ) {
-            $wire_fields = $lms_settings['payment_methods']['wire_transfer']['fields'];
-            if ( ! empty( $wire_fields['account_number'] ) ) {
-                $acc_num = trim( $wire_fields['account_number'] );
-                $bank_name = isset( $wire_fields['bank_name'] ) ? strtolower( $wire_fields['bank_name'] ) : '';
-                
-                $suffix = '';
-                if ( strpos( $bank_name, 'aba' ) !== false || strpos( $bank_name, 'advanced bank of asia' ) !== false ) {
-                    $suffix = 'aba';
-                } elseif ( strpos( $bank_name, 'acleda' ) !== false ) {
-                    $suffix = 'acleda';
-                } elseif ( strpos( $bank_name, 'wing' ) !== false ) {
-                    $suffix = 'wing';
-                }
-                
-                if ( ! empty( $suffix ) ) {
-                    $bakong_id = $acc_num . '@' . $suffix;
-                } else {
-                    $bakong_id = $acc_num . '@aba';
-                }
-            }
-        }
-    }
-    
-    return trim( $bakong_id );
+    // Set fallback to your personal ABA account details
+    return '012572771@aba';
 }
 
 /**
@@ -594,31 +534,12 @@ function reandaily_get_manual_bank_details_fallback() {
     $account_name  = reandaily_get_theme_mod( 'reandaily_manual_account_name', '' );
     $account_no    = reandaily_get_theme_mod( 'reandaily_manual_account_no', '' );
     
-    // Fallback to WooCommerce BACS
     if ( empty( $bank_name ) && empty( $account_name ) && empty( $account_no ) ) {
-        $bacs_accounts = get_option( 'woocommerce_bacs_accounts' );
-        if ( empty( $bacs_accounts ) ) {
-            $bacs_accounts = get_option( 'bacs_accounts' );
-        }
-        if ( ! empty( $bacs_accounts ) && is_array( $bacs_accounts ) ) {
-            $first_account = reset( $bacs_accounts );
-            if ( ! empty( $first_account ) ) {
-                $bank_name    = isset( $first_account['bank_name'] ) ? $first_account['bank_name'] : '';
-                $account_name  = isset( $first_account['account_name'] ) ? $first_account['account_name'] : '';
-                $account_no    = isset( $first_account['account_number'] ) ? $first_account['account_number'] : '';
-            }
-        }
-    }
-    
-    // Fallback to MasterStudy Wire Transfer settings
-    if ( empty( $bank_name ) && empty( $account_name ) && empty( $account_no ) ) {
-        $lms_settings = get_option( 'stm_lms_settings' );
-        if ( ! empty( $lms_settings ) && isset( $lms_settings['payment_methods']['wire_transfer']['fields'] ) ) {
-            $wire_fields = $lms_settings['payment_methods']['wire_transfer']['fields'];
-            $bank_name    = isset( $wire_fields['bank_name'] ) ? $wire_fields['bank_name'] : '';
-            $account_name  = isset( $wire_fields['holder_name'] ) ? $wire_fields['holder_name'] : '';
-            $account_no    = isset( $wire_fields['account_number'] ) ? $wire_fields['account_number'] : '';
-        }
+        return array(
+            'bank_name'    => 'ABA Bank',
+            'account_name' => 'JOHN Chanthy',
+            'account_no'   => '012572771'
+        );
     }
     
     return array(
@@ -1769,3 +1690,80 @@ class Reandaily_Theme_Github_Updater {
 
 // Initialize Custom Updater
 new Reandaily_Theme_Github_Updater();
+
+
+// ============================================================
+// EMVCo BAKONG KHQR GENERATOR CLASS (NO BUSINESS LICENSE NEEDED)
+// ============================================================
+class Reandaily_KHQR_Generator {
+    
+    /**
+     * Calculate CCITT CRC16 Checksum
+     */
+    private static function crc16_ccitt( $str ) {
+        $crc = 0xFFFF;
+        $len = strlen( $str );
+        for ( $i = 0; $i < $len; $i++ ) {
+            $x = (($crc >> 8) ^ ord($str[$i])) & 0xFF;
+            $x ^= $x >> 4;
+            $crc = (($crc << 8) ^ ($x << 12) ^ ($x << 5) ^ $x) & 0xFFFF;
+        }
+        return sprintf( '%04X', $crc );
+    }
+
+    /**
+     * Format tag helper
+     */
+    private static function emv_tag( $tag, $value ) {
+        return sprintf( '%02d%02d%s', $tag, strlen($value), $value );
+    }
+
+    /**
+     * Generate personal KHQR String
+     */
+    public static function generate( $amount, $currency = 'USD', $bill_number = '' ) {
+        // 00. Payload Format Indicator
+        $payload = self::emv_tag( 0, '01' );
+        
+        // 01. Point of Initiation Method (12 = Dynamic QR)
+        $payload .= self::emv_tag( 1, '12' );
+
+        // 30. Merchant Account Information (Bakong specific format for ABA Bank Account)
+        // For ABA Bank: acquire ID = "aba", account ID = "012572771"
+        $merchant_info = self::emv_tag( 0, 'aba' ); // Global Bank code identifier
+        $merchant_info .= self::emv_tag( 1, '012572771' ); // ABA Account ID
+        $payload .= self::emv_tag( 30, $merchant_info );
+
+        // 52. Merchant Category Code (8299 = Schools/Education Services)
+        $payload .= self::emv_tag( 52, '8299' );
+
+        // 53. Transaction Currency (840 = USD, 116 = KHR)
+        $currency_code = ($currency === 'KHR') ? '116' : '840';
+        $payload .= self::emv_tag( 53, $currency_code );
+
+        // 54. Transaction Amount
+        $formatted_amount = number_format( (float)$amount, 2, '.', '' );
+        $payload .= self::emv_tag( 54, $formatted_amount );
+
+        // 58. Country Code
+        $payload .= self::emv_tag( 58, 'KH' );
+
+        // 59. Merchant Name
+        $payload .= self::emv_tag( 59, 'JOHN Chanthy' );
+
+        // 60. Merchant City
+        $payload .= self::emv_tag( 60, 'Phnom Penh' );
+
+        // 62. Additional Data Field (Reference Bill Number)
+        if ( ! empty( $bill_number ) ) {
+            $ref_label = self::emv_tag( 1, substr( $bill_number, 0, 25 ) ); // Bill Number tag
+            $payload .= self::emv_tag( 62, $ref_label );
+        }
+
+        // 63. CRC-16 Checksum
+        $payload .= '6304';
+        $crc = self::crc16_ccitt( $payload );
+        
+        return $payload . $crc;
+    }
+}

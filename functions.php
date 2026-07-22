@@ -1784,10 +1784,6 @@ class Reandaily_ABA_PayWay_Gateway {
         return defined( 'ABA_PAYWAY_API_URL' ) ? ABA_PAYWAY_API_URL : 'https://checkout-sandbox.payway.com.kh/api/payment-gateway/v1/payments/purchase';
     }
 
-    /**
-     * Generate HMAC-SHA512 hash signature required by ABA PayWay API
-     * Signature format: base64(hmac_sha512(req_time + merchant_id + tran_id + amount + items + shipping + firstname + lastname + email + phone + type + payment_option + continue_success_url + return_url, api_key))
-     */
     public static function generate_hash( $params ) {
         $req_time             = $params['req_time'] ?? '';
         $merchant_id          = self::get_merchant_id();
@@ -1810,3 +1806,108 @@ class Reandaily_ABA_PayWay_Gateway {
         return base64_encode( $hash );
     }
 }
+
+/**
+ * AJAX Handler: Generates automated ABA PayWay checkout parameters (Form POST data + HMAC Hash)
+ */
+function reandaily_ajax_get_payway_checkout_data() {
+    $bill_number = sanitize_text_field( $_POST['bill_number'] ?? '' );
+    $course_id   = absint( $_POST['course_id'] ?? 0 );
+    $amount      = floatval( $_POST['amount'] ?? 0 );
+    $firstname   = sanitize_text_field( $_POST['firstname'] ?? 'Student' );
+    $lastname    = sanitize_text_field( $_POST['lastname'] ?? '' );
+    $email       = sanitize_email( $_POST['email'] ?? '' );
+    $phone       = sanitize_text_field( $_POST['phone'] ?? '' );
+
+    if ( empty( $bill_number ) || empty( $course_id ) || $amount <= 0 ) {
+        wp_send_json_error( array( 'message' => 'Missing parameter values.' ) );
+    }
+
+    $req_time     = date( 'YmdHis' );
+    $merchant_id  = Reandaily_ABA_PayWay_Gateway::get_merchant_id();
+    $tran_id      = $bill_number;
+    $amt_str      = number_format( $amount, 2, '.', '' );
+    $items        = base64_encode( json_encode( array( array( 'name' => get_the_title( $course_id ), 'quantity' => '1', 'price' => $amt_str ) ) ) );
+    $return_url   = base64_encode( home_url( '/enroll/?payway_callback=1&bill_number=' . $bill_number ) );
+    $continue_url = base64_encode( get_permalink( $course_id ) );
+
+    $hash_params = array(
+        'req_time'             => $req_time,
+        'tran_id'              => $tran_id,
+        'amount'               => $amt_str,
+        'items'                => $items,
+        'shipping'             => '0.00',
+        'firstname'            => $firstname,
+        'lastname'             => $lastname,
+        'email'                => $email,
+        'phone'                => $phone,
+        'type'                 => 'purchase',
+        'payment_option'       => 'abapay_khqr',
+        'continue_success_url' => $continue_url,
+        'return_url'           => $return_url,
+    );
+
+    $hash = Reandaily_ABA_PayWay_Gateway::generate_hash( $hash_params );
+
+    wp_send_json_success( array(
+        'api_url'              => Reandaily_ABA_PayWay_Gateway::get_api_url(),
+        'req_time'             => $req_time,
+        'merchant_id'          => $merchant_id,
+        'tran_id'              => $tran_id,
+        'amount'               => $amt_str,
+        'items'                => $items,
+        'shipping'             => '0.00',
+        'firstname'            => $firstname,
+        'lastname'             => $lastname,
+        'email'                => $email,
+        'phone'                => $phone,
+        'type'                 => 'purchase',
+        'payment_option'       => 'abapay_khqr',
+        'continue_success_url' => $continue_url,
+        'return_url'           => $return_url,
+        'hash'                 => $hash
+    ) );
+}
+add_action( 'wp_ajax_reandaily_get_payway_checkout_data',        'reandaily_ajax_get_payway_checkout_data' );
+add_action( 'wp_ajax_nopriv_reandaily_get_payway_checkout_data', 'reandaily_ajax_get_payway_checkout_data' );
+
+/**
+ * Handle incoming PayWay Return URL redirect callback to complete student enrollment
+ */
+add_action( 'template_redirect', function() {
+    if ( isset( $_GET['payway_callback'] ) && ! empty( $_GET['bill_number'] ) ) {
+        $bill_number = sanitize_text_field( $_GET['bill_number'] );
+        
+        global $wpdb;
+        $table = $wpdb->prefix . 'reandaily_enrollments';
+        $enrollment = $wpdb->get_row( $wpdb->prepare(
+            "SELECT user_id, course_id, student_name, student_email FROM {$table} WHERE bill_number = %s LIMIT 1",
+            $bill_number
+        ) );
+
+        if ( $enrollment ) {
+            $user_id   = intval( $enrollment->user_id );
+            $course_id = intval( $enrollment->course_id );
+
+            if ( $user_id > 0 && $course_id > 0 ) {
+                // Auto enroll
+                if ( class_exists( 'STM_LMS_Course' ) ) {
+                    STM_LMS_Course::add_user_course( $course_id, $user_id, 0, 0 );
+                }
+                
+                // Update DB status
+                $wpdb->update( $table, array( 'payment_status' => 'paid_verified' ), array( 'bill_number' => $bill_number ) );
+
+                // Log in student if needed
+                if ( ! is_user_logged_in() || get_current_user_id() !== $user_id ) {
+                    wp_set_current_user( $user_id );
+                    wp_set_auth_cookie( $user_id, true );
+                }
+
+                // Redirect to course
+                wp_safe_redirect( add_query_arg( 'enroll_success', '1', get_permalink( $course_id ) ) );
+                exit;
+            }
+        }
+    }
+}, 2 );

@@ -1185,6 +1185,25 @@ function reandaily_customize_register( $wp_customize ) {
         'title'    => __( 'KHQR / ABA Payment Settings', 'reandaily-theme' ),
         'priority' => 40,
     ) );
+    
+    // Payment Mode: Online (Auto-Verification API) vs Offline (Manual QR Standee)
+    $wp_customize->add_setting( 'reandaily_payment_mode', array(
+        'default'           => 'online',
+        'transport'         => 'refresh',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'reandaily_payment_mode_control', array(
+        'label'       => __( 'Payment Gateway Mode', 'reandaily-theme' ),
+        'description' => __( 'Select "Online Auto-Payment" to check automated payments via Bakong/ABA API, or "Offline Manual Payment" to show standalone QR and receipt confirmation.', 'reandaily-theme' ),
+        'section'     => 'reandaily_khqr_section',
+        'settings'    => 'reandaily_payment_mode',
+        'type'        => 'radio',
+        'choices'     => array(
+            'online'  => __( '⚡ Online Auto Payment (Automatic API Verification via Bakong/ABA)', 'reandaily-theme' ),
+            'offline' => __( '📝 Offline Manual Payment (Manual QR Standee & Receipt Upload)', 'reandaily-theme' ),
+        ),
+    ) );
+
     // ABA PayWay Link (primary — paste your https://link.payway.com.kh/... link)
     $wp_customize->add_setting( 'reandaily_aba_payway_link', array( 'default' => '', 'transport' => 'refresh', 'sanitize_callback' => 'esc_url_raw' ) );
     $wp_customize->add_control( 'reandaily_aba_payway_link_control', array( 'label' => __( 'ABA PayWay Link (e.g. https://link.payway.com.kh/ABAPAYxxx)', 'reandaily-theme' ), 'description' => __( 'Paste your PayWay link here. This will be encoded as the QR code for payment.', 'reandaily-theme' ), 'section' => 'reandaily_khqr_section', 'settings' => 'reandaily_aba_payway_link', 'type' => 'url' ) );

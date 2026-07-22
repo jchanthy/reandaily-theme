@@ -852,14 +852,26 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
 
         if (container) {
             container.innerHTML = ''; // Clear previous
-            new QRCode(container, {
-                text: str,
-                width: 220,
-                height: 220,
-                colorDark : "#000000",
-                colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.H
-            });
+            try {
+                new QRCode(container, {
+                    text: str,
+                    width: 220,
+                    height: 220,
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.M
+                });
+            } catch(e) {
+                container.innerHTML = '';
+                new QRCode(container, {
+                    text: str,
+                    width: 220,
+                    height: 220,
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.L
+                });
+            }
 
             // Append custom site logo in the center
             if (CONFIG.qrLogoUrl) {

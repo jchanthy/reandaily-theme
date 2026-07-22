@@ -384,15 +384,15 @@ if ( empty( $qr_logo_url ) ) {
                                 </button>
                             </div>
                         </div>
-                                                    <!-- Mobile Bakong app button -->
+                        <!-- Mobile Banking App Button -->
                         <div class="payment-app-buttons" style="display: flex; flex-direction: column; gap: 12px; max-width: 340px; margin: 15px auto 20px auto; font-family: 'Kantumruy Pro', sans-serif !important;">
                             <a href="bakong://pay?qr=" 
                                id="btn-bakong-mobile"
                                class="btn-bakong-tap"
-                               style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 20px; font-size: 14.5px; font-weight: 700; color: #ffffff; background: linear-gradient(135deg, #e21836 0%, #9e0c20 100%); border-radius: 10px; text-decoration: none; box-shadow: 0 4px 15px rgba(226, 24, 54, 0.15); transition: all 0.2s;"
+                               style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 20px; font-size: 14.5px; font-weight: 700; color: #ffffff; background: linear-gradient(135deg, #005a9c 0%, #003b68 100%); border-radius: 10px; text-decoration: none; box-shadow: 0 4px 15px rgba(0, 90, 156, 0.2); transition: all 0.2s;"
                                target="_blank" rel="noopener">
-                                <span style="font-size: 18px;">🟥</span>
-                                <span>បើកកម្មវិធី Bakong / Scan ទូទាត់</span>
+                                <span style="font-size: 18px;">💳</span>
+                                <span>បើកកម្មវិធី ABA Mobile / Scan KHQR ទូទាត់</span>
                             </a>
                         </div>
 
@@ -813,63 +813,21 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
                         }
                     }
 
-                    // Dynamically show/hide manual payment tab or container based on API response
-                    if (isBakongApiActive) {
-                        if (CONFIG.bakongApiEnabled && tabContainer) {
-                            tabContainer.style.display = 'flex';
-                        }
-                        switchTab('auto');
+                    // Always present automated QR Code view (PayWay / KHQR)
+                    switchTab('auto');
 
-                        // Hide debug error box since API worked
-                        const debugDiv = document.getElementById('bakong-api-debug-info');
-                        if (debugDiv) debugDiv.style.display = 'none';
-                    } else {
-                        if (tabContainer) {
-                            tabContainer.style.display = 'none';
-                        }
-                        switchTab('manual');
-
-                        // Show debug error box
-                        const debugDiv = document.getElementById('bakong-api-debug-info');
-                        const debugMsg = document.getElementById('bakong-api-debug-message');
-                        const hasError = data.data.bakong_api_error;
-                        const is403 = hasError && (hasError.toLowerCase().includes('403') || hasError.toLowerCase().includes('forbidden'));
-                        if (hasError && (CONFIG.isAdmin || is403)) {
-                            if (debugDiv && debugMsg) {
-                                debugMsg.innerText = formatDebugMessage(data.data.bakong_api_error);
-                                debugDiv.style.display = 'block';
-                            }
-                        } else if (debugDiv) {
-                            debugDiv.style.display = 'none';
-                        }
-                    }
+                    // Hide debug error box
+                    const debugDiv = document.getElementById('bakong-api-debug-info');
+                    if (debugDiv) debugDiv.style.display = 'none';
                 } else {
                     const msg = (data.data && data.data.message) ? data.data.message : 'មិនអាចបង្កើត QR Code បានទេ។';
                     renderFallbackQR(msg);
-                    if (tabContainer) {
-                        tabContainer.style.display = 'none';
-                    }
-                    switchTab('manual');
-
-                    // Show debug error box if returned in error payload
-                    const debugDiv = document.getElementById('bakong-api-debug-info');
-                    const debugMsg = document.getElementById('bakong-api-debug-message');
-                    const hasError = data.data && data.data.bakong_api_error;
-                    const is403 = hasError && (hasError.toLowerCase().includes('403') || hasError.toLowerCase().includes('forbidden'));
-                    if (hasError && (CONFIG.isAdmin || is403)) {
-                        if (debugDiv && debugMsg) {
-                            debugMsg.innerText = formatDebugMessage(data.data.bakong_api_error);
-                            debugDiv.style.display = 'block';
-                        }
-                    }
+                    switchTab('auto');
                 }
             })
             .catch(err => {
                 renderFallbackQR('Network error: ' + err.message);
-                if (tabContainer) {
-                    tabContainer.style.display = 'none';
-                }
-                switchTab('manual');
+                switchTab('auto');
 
                 // Show catch network errors
                 const debugDiv = document.getElementById('bakong-api-debug-info');

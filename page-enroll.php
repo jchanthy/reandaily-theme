@@ -143,13 +143,12 @@ if ( empty( $qr_logo_url ) ) {
                 ២. ឬចុះឈ្មោះគណនីសិស្សធម្មតា (Role: Subscriber) ដើម្បីសាកល្បង។
                 <div class="admin-config-diagnostics" style="margin-top: 15px; padding: 15px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; color: #334155; font-size: 13px; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
                     <strong style="color: #0f172a; display: block; margin-bottom: 8px; font-size: 14px;">⚙️ Configuration Diagnostics (Admin Only):</strong>
-                    <div style="margin-bottom: 4px;">• <b>Automated API Enabled:</b> <?php echo ( function_exists( 'reandaily_get_theme_mod' ) ? reandaily_get_theme_mod( 'reandaily_bakong_enabled', false ) : get_theme_mod( 'reandaily_bakong_enabled', false ) ) ? '<span style="color:#16a34a;font-weight:700;">TRUE (Enabled)</span>' : '<span style="color:#dc2626;font-weight:700;">FALSE (Disabled)</span>'; ?></div>
-                    <div style="margin-bottom: 4px;">• <b>Bakong Account ID:</b> <code><?php echo esc_html( function_exists( 'reandaily_get_bakong_id_fallback' ) ? reandaily_get_bakong_id_fallback() : 'Not Set' ); ?></code></div>
-                    <div style="margin-bottom: 4px;">• <b>Bakong API Token:</b> <?php echo ! empty( function_exists( 'reandaily_get_theme_mod' ) ? reandaily_get_theme_mod( 'reandaily_bakong_api_token', '' ) : get_theme_mod( 'reandaily_bakong_api_token', '' ) ) ? '<span style="color:#16a34a;font-weight:700;">Configured</span>' : '<span style="color:#dc2626;font-weight:700;">Missing / Empty</span>'; ?></div>
-                    <div style="margin-bottom: 4px;">• <b>Bakong API Endpoint:</b> <code><?php echo esc_html( function_exists( 'reandaily_get_theme_mod' ) ? reandaily_get_theme_mod( 'reandaily_bakong_api_endpoint', 'https://api-bakong.nbc.gov.kh' ) : get_theme_mod( 'reandaily_bakong_api_endpoint', 'https://api-bakong.nbc.gov.kh' ) ); ?></code></div>
+                    <div style="margin-bottom: 4px;">• <b>Automated ABA PayWay Gateway:</b> <span style="color:#16a34a;font-weight:700;">ACTIVE (Sandbox Credentials Configured)</span></div>
+                    <div style="margin-bottom: 4px;">• <b>Merchant ID:</b> <code>ec462060</code></div>
+                    <div style="margin-bottom: 4px;">• <b>Bank Account:</b> <code>008 668 510 (MENG HANN AND JOHN CHANTHY)</code></div>
+                    <div style="margin-bottom: 4px;">• <b>API Endpoint:</b> <code>https://checkout-sandbox.payway.com.kh/api/payment-gateway/v1/payments/purchase</code></div>
                     <div style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed #e2e8f0; color: #475569;">
                         🌐 <b>Server Public IP:</b> <code style="font-size: 14px; font-weight: 700; color: #0f172a; background: #f1f5f9; padding: 2px 6px; border-radius: 4px;"><?php echo esc_html( $server_ip ); ?></code>
-                        <span style="display: block; font-size: 11.5px; color: #b45309; margin-top: 2px;">⚠️ Copy this IP and send it to Bakong/NBC support to whitelist. This is required to solve the 403 Forbidden error!</span>
                     </div>
                 </div>
             </div>

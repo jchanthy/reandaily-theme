@@ -1767,3 +1767,46 @@ class Reandaily_KHQR_Generator {
         return $payload . $crc;
     }
 }
+
+// ============================================================
+// ABA PAYWAY AUTOMATED PAYMENT GATEWAY (SANDBOX & PRODUCTION)
+// ============================================================
+class Reandaily_ABA_PayWay_Gateway {
+    public static function get_merchant_id() {
+        return defined( 'ABA_PAYWAY_MERCHANT_ID' ) ? ABA_PAYWAY_MERCHANT_ID : 'ec462060';
+    }
+
+    public static function get_api_key() {
+        return defined( 'ABA_PAYWAY_API_KEY' ) ? ABA_PAYWAY_API_KEY : '79671fdf672a07391d8332d63836d0df3b3d948e';
+    }
+
+    public static function get_api_url() {
+        return defined( 'ABA_PAYWAY_API_URL' ) ? ABA_PAYWAY_API_URL : 'https://checkout-sandbox.payway.com.kh/api/payment-gateway/v1/payments/purchase';
+    }
+
+    /**
+     * Generate HMAC-SHA512 hash signature required by ABA PayWay API
+     * Signature format: base64(hmac_sha512(req_time + merchant_id + tran_id + amount + items + shipping + firstname + lastname + email + phone + type + payment_option + continue_success_url + return_url, api_key))
+     */
+    public static function generate_hash( $params ) {
+        $req_time             = $params['req_time'] ?? '';
+        $merchant_id          = self::get_merchant_id();
+        $tran_id              = $params['tran_id'] ?? '';
+        $amount               = $params['amount'] ?? '';
+        $items                = $params['items'] ?? '';
+        $shipping             = $params['shipping'] ?? '0.00';
+        $firstname            = $params['firstname'] ?? '';
+        $lastname             = $params['lastname'] ?? '';
+        $email                = $params['email'] ?? '';
+        $phone                = $params['phone'] ?? '';
+        $type                 = $params['type'] ?? 'purchase';
+        $payment_option       = $params['payment_option'] ?? 'abapay_khqr';
+        $continue_success_url = $params['continue_success_url'] ?? '';
+        $return_url           = $params['return_url'] ?? '';
+
+        $data_str = $req_time . $merchant_id . $tran_id . $amount . $items . $shipping . $firstname . $lastname . $email . $phone . $type . $payment_option . $continue_success_url . $return_url;
+
+        $hash = hash_hmac( 'sha512', $data_str, self::get_api_key(), true );
+        return base64_encode( $hash );
+    }
+}

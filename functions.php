@@ -1030,8 +1030,8 @@ function reandaily_enqueue_styles() {
     // Load child style at the absolute end of the queue to override all parent style sheets
     wp_enqueue_style( 'reandaily-style-override',
         get_stylesheet_directory_uri() . '/style.css',
-        array( 'ms-lms-starter-theme-style', 'starter-base', 'starter-style', 'stm_lms_starter_theme_css_frontend' ),
-        time() // Cache busting for development
+        array( 'ms-lms-starter-theme-style' ),
+        '1.2.0'
     );
 }
 add_action( 'wp_enqueue_scripts', 'reandaily_enqueue_styles', 9999 );

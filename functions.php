@@ -55,16 +55,18 @@ add_action( 'init', function() {
     }
 
     // Auto-create physical 'enroll' page if missing to prevent 404/canonical redirects on production
-    if ( ! is_admin() && ! wp_doing_ajax() ) {
-        $page = get_page_by_path( 'enroll' );
-        if ( ! $page ) {
-            wp_insert_post( array(
-                'post_title'   => 'Enroll',
-                'post_name'    => 'enroll',
-                'post_status'  => 'publish',
-                'post_type'    => 'page',
-                'post_content' => '',
-            ) );
+    if ( is_admin() && ! wp_doing_ajax() ) {
+        if ( function_exists( 'get_page_by_path' ) ) {
+            $page = get_page_by_path( 'enroll' );
+            if ( ! $page ) {
+                wp_insert_post( array(
+                    'post_title'   => 'Enroll',
+                    'post_name'    => 'enroll',
+                    'post_status'  => 'publish',
+                    'post_type'    => 'page',
+                    'post_content' => '',
+                ) );
+            }
         }
     }
 } );

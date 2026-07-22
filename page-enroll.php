@@ -520,34 +520,47 @@ if ( empty( $qr_logo_url ) ) {
                         }
                         ?>
 
-                        <?php if ( ! empty( $manual_qr_payload ) ) : ?>
-                            <div style="text-align: center; margin: 15px 0;">
-                                <p style="font-size: 14px; font-weight: 700; color: #334155; margin-bottom: 10px;">
-                                    <?php if ( $has_bakong_id ) : ?>
-                                        ស្កេន QR ដើម្បីទូទាត់ប្រាក់ (ស្កេនបានគ្រប់ធនាគារ)៖
-                                    <?php else : ?>
-                                        ស្កេន QR ដើម្បីទូទាត់ប្រាក់ (សម្រាប់កម្មវិធី ABA Mobile)៖
-                                    <?php endif; ?>
-                                </p>
+                        <!-- Authentic ABA KHQR Standee Card (Manual Testing View) -->
+                        <div class="aba-khqr-card-container" style="max-width: 380px; margin: 15px auto 25px auto; background: #eef2f6; border-radius: 28px; padding: 24px; box-shadow: 0 15px 40px rgba(15, 23, 42, 0.12); font-family: 'Inter', 'Kantumruy Pro', sans-serif !important;">
+                            <div class="aba-card-inner" style="background: #ffffff; border-radius: 24px; padding: 25px 20px 20px 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); position: relative; text-align: center;">
                                 
-                                <div class="qr-frame-wrapper" style="display: inline-block; padding: 20px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 16px; box-shadow: 0 10px 25px rgba(0, 90, 156, 0.08);">
-                                    <?php if ( wp_is_mobile() && ! empty( $aba_pay_deep_link ) ) : ?>
-                                        <a href="<?php echo esc_url( $aba_pay_deep_link ); ?>" target="_blank" rel="noopener" style="display: block; cursor: pointer; text-decoration: none;" title="ចុចទីនេះដើម្បីទូទាត់ផ្ទាល់លើកម្មវិធី ABA Mobile (Click to pay directly via ABA Mobile)">
-                                    <?php endif; ?>
-                                        <div id="manual-qr-container" style="display: flex; justify-content: center; align-items: center; margin: 0 auto; width: 240px; height: 240px; border-radius: 8px; overflow: hidden; background: #ffffff; position: relative;"></div>
-                                    <?php if ( wp_is_mobile() && ! empty( $aba_pay_deep_link ) ) : ?>
-                                        </a>
-                                    <?php endif; ?>
+                                <!-- ABA Logo Header -->
+                                <div style="display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 20px;">
+                                    <span style="font-size: 22px; font-weight: 900; color: #005a9c; letter-spacing: -0.5px;">ABA<sup style="color: #e21836; font-size: 14px; font-weight: 900;">'</sup></span>
+                                    <span style="font-size: 20px; font-weight: 800; color: #0f172a; letter-spacing: 0.5px;">QR</span>
                                 </div>
-                                <p style="font-size: 12.5px; color: #64748b; margin-top: 10px;">
-                                    <?php if ( $has_bakong_id ) : ?>
-                                        (ស្កេន QR ខាងលើជាមួយកម្មវិធី <b>ធនាគារណាមួយ (ABA, Bakong, Wing, Acleda...)</b> ដើម្បីទូទាត់ប្រាក់ ឬចុចលើរូបដើម្បីទូទាត់ផ្ទាល់តាម Bakong)
-                                    <?php else : ?>
-                                        (ស្កេន QR ខាងលើជាមួយកម្មវិធី <b>ABA Mobile</b> ដើម្បីទូទាត់ប្រាក់ ឬចុចលើរូបដើម្បីទូទាត់ផ្ទាល់)
-                                    <?php endif; ?>
+
+                                <!-- Red KHQR Standee Badge & Card Body -->
+                                <div style="background: #ffffff; border-radius: 20px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                    <div style="background: #e21836; padding: 10px 15px; text-align: center; color: #ffffff; font-weight: 900; font-size: 18px; letter-spacing: 1.5px; position: relative;">
+                                        KHQR
+                                        <div style="position: absolute; right: 0; bottom: -8px; width: 0; height: 0; border-top: 8px solid #e21836; border-right: 8px solid transparent;"></div>
+                                    </div>
+
+                                    <div style="padding: 20px 15px 15px 15px; text-align: left;">
+                                        <div style="font-size: 13.5px; font-weight: 700; color: #1e293b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">MENG H. & JOHN C.</div>
+                                        <div style="font-size: 28px; font-weight: 900; color: #0f172a; line-height: 1.2;">
+                                            <?php if ( $currency === 'KHR' ) : ?>
+                                                ៛<?php echo number_format( $price_khr ); ?>
+                                            <?php else : ?>
+                                                $<?php echo number_format( $price_usd, 2 ); ?>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+
+                                    <div style="border-top: 2px dashed #cbd5e1; margin: 0 15px; position: relative;"></div>
+
+                                    <!-- QR Code Frame & Canvas Container -->
+                                    <div style="padding: 20px 15px; text-align: center;">
+                                        <div id="manual-qr-container" style="display: flex; justify-content: center; align-items: center; margin: 0 auto; width: 220px; height: 220px; border-radius: 8px; overflow: hidden; background: #ffffff; position: relative;"></div>
+                                    </div>
+                                </div>
+
+                                <p style="font-size: 12.5px; color: #64748b; margin-top: 15px; margin-bottom: 5px; font-weight: 500;">
+                                    Scan with any Mobile Banking App supporting KHQR
                                 </p>
                             </div>
-                        <?php endif; ?>
+                        </div>
 
                         <!-- Dynamic Payment Display Card -->
                         <?php if ( ! empty( $manual_bank_name ) || ! empty( $manual_account_name ) || ! empty( $manual_account_no ) ) : ?>
@@ -845,6 +858,51 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
                     md5HashValue = data.data.md5;
 
                     renderQR(qrString);
+                    
+                    // Render into manual container as well
+                    const manualContainer = document.getElementById('manual-qr-container');
+                    if (manualContainer) {
+                        manualContainer.innerHTML = '';
+                        try {
+                            new QRCode(manualContainer, {
+                                text: qrString,
+                                width: 220,
+                                height: 220,
+                                colorDark : "#000000",
+                                colorLight : "#ffffff",
+                                correctLevel : QRCode.CorrectLevel.M
+                            });
+                        } catch(e) {
+                            new QRCode(manualContainer, {
+                                text: qrString,
+                                width: 220,
+                                height: 220,
+                                colorDark : "#000000",
+                                colorLight : "#ffffff",
+                                correctLevel : QRCode.CorrectLevel.L
+                            });
+                        }
+
+                        // Append center red emblem inside manual QR container
+                        const emblem = document.createElement('div');
+                        emblem.style.position = 'absolute';
+                        emblem.style.top = '50%';
+                        emblem.style.left = '50%';
+                        emblem.style.transform = 'translate(-50%, -50%)';
+                        emblem.style.width = '38px';
+                        emblem.style.height = '38px';
+                        emblem.style.borderRadius = '50%';
+                        emblem.style.background = '#e21836';
+                        emblem.style.display = 'flex';
+                        emblem.style.alignItems = 'center';
+                        emblem.style.justifyContent = 'center';
+                        emblem.style.boxShadow = '0 2px 6px rgba(0,0,0,0.2)';
+                        emblem.style.border = '2.5px solid #ffffff';
+                        emblem.style.zIndex = '10';
+                        emblem.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="#ffffff"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>';
+                        manualContainer.appendChild(emblem);
+                    }
+
                     startQRTimer();
 
                     // Update ABA Mobile app deep link button

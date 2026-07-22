@@ -367,41 +367,90 @@ if ( empty( $qr_logo_url ) ) {
 
                     <!-- Toggle Tabs completely hidden to show only the active setup configured in admin -->
 
-                    <!-- 1. AUTOMATED ABA PAYWAY PAYMENT SECTION -->
+                    <!-- 1. AUTOMATED ABA KHQR AUTHENTIC CARD PAYMENT SECTION -->
                     <div id="section-auto-pay" class="payment-method-section" style="display: block;">
                         
-                        <!-- Official ABA PayWay Form POST Container -->
-                        <div id="payway-checkout-container" style="text-align: center; margin: 20px 0;">
-                            <form id="aba_merchant_request" method="POST" action="https://checkout-sandbox.payway.com.kh/api/payment-gateway/v1/payments/purchase" target="payway_iframe" style="display: none;">
-                                <input type="hidden" name="req_time" id="payway_req_time">
-                                <input type="hidden" name="merchant_id" id="payway_merchant_id">
-                                <input type="hidden" name="tran_id" id="payway_tran_id">
-                                <input type="hidden" name="amount" id="payway_amount">
-                                <input type="hidden" name="items" id="payway_items">
-                                <input type="hidden" name="shipping" id="payway_shipping" value="0.00">
-                                <input type="hidden" name="firstname" id="payway_firstname">
-                                <input type="hidden" name="lastname" id="payway_lastname">
-                                <input type="hidden" name="email" id="payway_email">
-                                <input type="hidden" name="phone" id="payway_phone">
-                                <input type="hidden" name="type" id="payway_type" value="purchase">
-                                <input type="hidden" name="payment_option" id="payway_payment_option" value="abapay_khqr">
-                                <input type="hidden" name="continue_success_url" id="payway_continue_success_url">
-                                <input type="hidden" name="return_url" id="payway_return_url">
-                                <input type="hidden" name="hash" id="payway_hash">
-                            </form>
-
-                            <div style="background: #ffffff; border: 1.5px solid #005a9c; border-radius: 16px; padding: 25px; box-shadow: 0 10px 30px rgba(0, 90, 156, 0.08); max-width: 440px; margin: 0 auto;">
-                                <div style="font-size: 42px; margin-bottom: 10px;">💳</div>
-                                <h3 style="font-size: 20px; font-weight: 800; color: #0f172a; margin-bottom: 8px;">ទូទាត់ប្រាក់តាម ABA PayWay</h3>
-                                <p style="font-size: 14px; color: #64748b; margin-bottom: 20px;">ចុចប៊ូតុងខាងក្រោមដើម្បីបើកផ្ទាំងទូទាត់ផ្លូវការរបស់ <b>ABA PayWay</b> (ស្កេន KHQR ឬ ABA Mobile ជាមួយតម្លៃកំណត់រួចរាល់ $<?php echo number_format( $price_usd, 2 ); ?>):</p>
+                        <!-- Authentic ABA KHQR Standee Card Wrapper -->
+                        <div class="aba-khqr-card-container" style="max-width: 380px; margin: 20px auto; background: #eef2f6; border-radius: 28px; padding: 24px; box-shadow: 0 15px 40px rgba(15, 23, 42, 0.12); font-family: 'Inter', 'Kantumruy Pro', sans-serif !important;">
+                            <div class="aba-card-inner" style="background: #ffffff; border-radius: 24px; padding: 25px 20px 20px 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); position: relative; text-align: center;">
                                 
-                                <button type="button" id="btn-launch-payway" style="width: 100%; background: linear-gradient(135deg, #005a9c 0%, #003b68 100%); color: #ffffff; padding: 16px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 90, 156, 0.25); transition: all 0.2s;">
-                                    🚀 បើកផ្ទាំងទូទាត់ប្រាក់ (Pay $<?php echo number_format( $price_usd, 2 ); ?> via ABA PayWay)
-                                </button>
+                                <!-- ABA Logo Header -->
+                                <div style="display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 20px;">
+                                    <span style="font-size: 22px; font-weight: 900; color: #005a9c; letter-spacing: -0.5px;">ABA<sup style="color: #e21836; font-size: 14px; font-weight: 900;">'</sup></span>
+                                    <span style="font-size: 20px; font-weight: 800; color: #0f172a; letter-spacing: 0.5px;">QR</span>
+                                </div>
+
+                                <!-- Red KHQR Standee Badge & Card Body -->
+                                <div style="background: #ffffff; border-radius: 20px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                    <div style="background: #e21836; padding: 10px 15px; text-align: center; color: #ffffff; font-weight: 900; font-size: 18px; letter-spacing: 1.5px; position: relative;">
+                                        KHQR
+                                        <div style="position: absolute; right: 0; bottom: -8px; width: 0; height: 0; border-top: 8px solid #e21836; border-right: 8px solid transparent;"></div>
+                                    </div>
+
+                                    <div style="padding: 20px 15px 15px 15px; text-align: left;">
+                                        <div style="font-size: 13.5px; font-weight: 700; color: #1e293b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">MENG H. & JOHN C.</div>
+                                        <div style="font-size: 28px; font-weight: 900; color: #0f172a; line-height: 1.2;">
+                                            <?php if ( $currency === 'KHR' ) : ?>
+                                                ៛<?php echo number_format( $price_khr ); ?>
+                                            <?php else : ?>
+                                                $<?php echo number_format( $price_usd, 2 ); ?>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+
+                                    <div style="border-top: 2px dashed #cbd5e1; margin: 0 15px; position: relative;"></div>
+
+                                    <!-- QR Code Frame & Canvas Container -->
+                                    <div style="padding: 20px 15px; text-align: center;">
+                                        <div id="khqr-loading" class="qr-loading">
+                                            <div class="qr-spinner"></div>
+                                            <p style="font-size: 13px; color: #64748b; margin-top: 8px;">កំពុងបង្កើត QR Code...</p>
+                                        </div>
+                                        <div id="khqr-canvas-wrap" class="hidden" style="text-align: center;">
+                                            <div style="display: inline-block; padding: 12px; background: #ffffff; border-radius: 12px; border: 1px solid #f1f5f9; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); position: relative;">
+                                                <div id="khqr-img-container" style="display: flex; justify-content: center; align-items: center; margin: 0 auto; width: 220px; height: 220px; border-radius: 8px; overflow: hidden; background: #ffffff; position: relative;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p style="font-size: 12.5px; color: #64748b; margin-top: 15px; margin-bottom: 5px; font-weight: 500;">
+                                    Scan with any Mobile Banking App supporting KHQR
+                                </p>
                             </div>
                         </div>
 
-                        <!-- PayWay Embedded Iframe View (Hidden until user clicks launch) -->
+                        <!-- Mobile Banking App Launcher Button -->
+                        <div class="payment-app-buttons" style="display: flex; flex-direction: column; gap: 12px; max-width: 380px; margin: 15px auto 20px auto; font-family: 'Kantumruy Pro', sans-serif !important;">
+                            <a href="bakong://pay?qr=" 
+                               id="btn-bakong-mobile"
+                               class="btn-bakong-tap"
+                               style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px 20px; font-size: 15px; font-weight: 800; color: #ffffff; background: linear-gradient(135deg, #005a9c 0%, #003b68 100%); border-radius: 14px; text-decoration: none; box-shadow: 0 6px 20px rgba(0, 90, 156, 0.25); transition: all 0.2s;"
+                               target="_blank" rel="noopener">
+                                <span style="font-size: 18px;">💳</span>
+                                <span>បើកកម្មវិធី ABA Mobile / Scan KHQR ទូទាត់</span>
+                            </a>
+                        </div>
+
+                        <!-- Hidden Official ABA PayWay Form POST for API Checkout -->
+                        <form id="aba_merchant_request" method="POST" action="https://checkout-sandbox.payway.com.kh/api/payment-gateway/v1/payments/purchase" target="payway_iframe" style="display: none;">
+                            <input type="hidden" name="req_time" id="payway_req_time">
+                            <input type="hidden" name="merchant_id" id="payway_merchant_id">
+                            <input type="hidden" name="tran_id" id="payway_tran_id">
+                            <input type="hidden" name="amount" id="payway_amount">
+                            <input type="hidden" name="items" id="payway_items">
+                            <input type="hidden" name="shipping" id="payway_shipping" value="0.00">
+                            <input type="hidden" name="firstname" id="payway_firstname">
+                            <input type="hidden" name="lastname" id="payway_lastname">
+                            <input type="hidden" name="email" id="payway_email">
+                            <input type="hidden" name="phone" id="payway_phone">
+                            <input type="hidden" name="type" id="payway_type" value="purchase">
+                            <input type="hidden" name="payment_option" id="payway_payment_option" value="abapay_khqr">
+                            <input type="hidden" name="continue_success_url" id="payway_continue_success_url">
+                            <input type="hidden" name="return_url" id="payway_return_url">
+                            <input type="hidden" name="hash" id="payway_hash">
+                        </form>
+
                         <div id="payway-iframe-wrapper" style="display: none; width: 100%; max-width: 500px; height: 600px; margin: 20px auto; border-radius: 16px; overflow: hidden; border: 1px solid #cbd5e1; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
                             <iframe name="payway_iframe" id="payway_iframe" style="width: 100%; height: 100%; border: none;"></iframe>
                         </div>
@@ -413,13 +462,13 @@ if ( empty( $qr_logo_url ) ) {
                         </div>
 
                         <!-- Live Verification Status -->
-                        <div id="polling-status-box" style="margin: 20px auto 10px auto; max-width: 340px; padding: 12px 18px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; font-family: 'Kantumruy Pro', sans-serif !important;">
+                        <div id="polling-status-box" style="margin: 20px auto 10px auto; max-width: 380px; padding: 12px 18px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; font-family: 'Kantumruy Pro', sans-serif !important;">
                             <div class="status-spinner" style="width: 16px; height: 16px; border: 2.5px solid #16a34a; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
                             <span style="font-size: 13.5px; font-weight: 700; color: #15803d;">ប្រព័ន្ធកំពុងរង់ចាំការទូទាត់ និងផ្ទៀងផ្ទាត់ស្វ័យប្រវត្តិ...</span>
                         </div>
                         
-                        <!-- Diagnostic Debug Box (Visible to all for troubleshooting payment verification issues) -->
-                        <div id="bakong-api-debug-info" style="display:none; margin: 15px auto; max-width: 340px; padding: 12px 18px; background: #fee2e2; border: 1px solid #fca5a5; border-radius: 10px; color: #991b1b; font-size: 13px; font-family: 'Kantumruy Pro', sans-serif !important; white-space: pre-wrap; line-height: 1.5; text-align: left;">
+                        <!-- Diagnostic Debug Box -->
+                        <div id="bakong-api-debug-info" style="display:none; margin: 15px auto; max-width: 380px; padding: 12px 18px; background: #fee2e2; border: 1px solid #fca5a5; border-radius: 10px; color: #991b1b; font-size: 13px; font-family: 'Kantumruy Pro', sans-serif !important; white-space: pre-wrap; line-height: 1.5; text-align: left;">
                             <strong style="color: #b91c1c; display: block; margin-bottom: 4px; font-size: 13.5px;">🔴 Payment Gateway Diagnostic Info:</strong>
                             <span id="bakong-api-debug-message"></span>
                         </div>
@@ -770,22 +819,64 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
     let transactionPollInterval = null;
     let md5HashValue = '';
 
-    // ── Official ABA PayWay Gateway Integration ───────────────────────────
+    // ── Official ABA PayWay & Authentic Standee QR Integration ────────────
     function generateKHQR() {
-        const btnLaunch = document.getElementById('btn-launch-payway');
+        const load = document.getElementById('khqr-loading');
+        const wrap = document.getElementById('khqr-canvas-wrap');
 
+        if (load) load.classList.remove('hidden');
+        if (wrap) wrap.classList.add('hidden');
+
+        // Fetch KHQR Payload String & PayWay parameters
         const fd = new FormData();
-        fd.append('action',      'reandaily_get_payway_checkout_data');
+        fd.append('action',      'reandaily_get_khqr');
         fd.append('nonce',       CONFIG.nonce);
         fd.append('course_id',   CONFIG.courseId);
+        fd.append('currency',    CONFIG.currency);
         fd.append('amount',      CONFIG.amount);
         fd.append('bill_number', CONFIG.billNumber);
-        fd.append('firstname',   enrollmentData.name ? enrollmentData.name.split(' ')[0] : 'Student');
-        fd.append('lastname',    enrollmentData.name && enrollmentData.name.split(' ').length > 1 ? enrollmentData.name.split(' ').slice(1).join(' ') : '');
-        fd.append('email',       enrollmentData.email || '');
-        fd.append('phone',       enrollmentData.phone || '');
+        fd.append('bill_token',  CONFIG.billToken);
 
         fetch(CONFIG.ajaxUrl, { method: 'POST', body: fd })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success && data.data && data.data.qr_string) {
+                    qrString = data.data.qr_string;
+                    md5HashValue = data.data.md5;
+
+                    renderQR(qrString);
+                    startQRTimer();
+
+                    // Update ABA Mobile app deep link button
+                    const bakongMobileBtn = document.getElementById('btn-bakong-mobile');
+                    if (bakongMobileBtn) {
+                        if (data.data.deeplink) {
+                            bakongMobileBtn.href = data.data.deeplink;
+                        } else {
+                            bakongMobileBtn.href = 'bakong://pay?qr=' + encodeURIComponent(qrString);
+                        }
+                    }
+
+                    switchTab('auto');
+                }
+            })
+            .catch(err => {
+                console.error('KHQR Generation Error: ', err);
+            });
+
+        // Also fetch PayWay form POST parameters in background
+        const fdPayWay = new FormData();
+        fdPayWay.append('action',      'reandaily_get_payway_checkout_data');
+        fdPayWay.append('nonce',       CONFIG.nonce);
+        fdPayWay.append('course_id',   CONFIG.courseId);
+        fdPayWay.append('amount',      CONFIG.amount);
+        fdPayWay.append('bill_number', CONFIG.billNumber);
+        fdPayWay.append('firstname',   enrollmentData.name ? enrollmentData.name.split(' ')[0] : 'Student');
+        fdPayWay.append('lastname',    enrollmentData.name && enrollmentData.name.split(' ').length > 1 ? enrollmentData.name.split(' ').slice(1).join(' ') : '');
+        fdPayWay.append('email',       enrollmentData.email || '');
+        fdPayWay.append('phone',       enrollmentData.phone || '');
+
+        fetch(CONFIG.ajaxUrl, { method: 'POST', body: fdPayWay })
             .then(r => r.json())
             .then(data => {
                 if (data.success && data.data) {
@@ -805,19 +896,6 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
                     document.getElementById('payway_continue_success_url').value = d.continue_success_url;
                     document.getElementById('payway_return_url').value           = d.return_url;
                     document.getElementById('payway_hash').value                 = d.hash;
-
-                    // Automatically bind launch button to submit form to PayWay portal
-                    if (btnLaunch) {
-                        btnLaunch.onclick = function() {
-                            const wrapper = document.getElementById('payway-iframe-wrapper');
-                            if (wrapper) wrapper.style.display = 'block';
-                            document.getElementById('aba_merchant_request').submit();
-                        };
-                    }
-
-                    // Start timer
-                    startQRTimer();
-                    switchTab('auto');
                 }
             })
             .catch(err => {

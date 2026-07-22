@@ -902,22 +902,6 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
                 console.error('PayWay Checkout Error: ', err);
             });
     }
-                renderFallbackQR('Network error: ' + err.message);
-                switchTab('auto');
-
-                // Show catch network errors
-                const debugDiv = document.getElementById('bakong-api-debug-info');
-                const debugMsg = document.getElementById('bakong-api-debug-message');
-                const errText = 'AJAX Catch Error: ' + err.message;
-                const is403 = errText.toLowerCase().includes('403') || errText.toLowerCase().includes('forbidden');
-                if (CONFIG.isAdmin || is403) {
-                    if (debugDiv && debugMsg) {
-                        debugMsg.innerText = formatDebugMessage(errText);
-                        debugDiv.style.display = 'block';
-                    }
-                }
-            });
-    }
 
 
     // Render QR using local QRCode.js library
@@ -949,24 +933,24 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
                 });
             }
 
-            // Append custom site logo in the center
-            if (CONFIG.qrLogoUrl) {
-                const logo = document.createElement('img');
-                logo.src = CONFIG.qrLogoUrl;
-                logo.style.position = 'absolute';
-                logo.style.top = '50%';
-                logo.style.left = '50%';
-                logo.style.transform = 'translate(-50%, -50%)';
-                logo.style.width = '42px';
-                logo.style.height = '42px';
-                logo.style.objectFit = 'contain';
-                logo.style.background = '#ffffff';
-                logo.style.padding = '3px';
-                logo.style.borderRadius = '8px';
-                logo.style.boxShadow = '0 2px 6px rgba(0,0,0,0.15)';
-                logo.style.zIndex = '10';
-                container.appendChild(logo);
-            }
+            // Append official Bakong KHQR Red Flower Emblem in the center
+            const emblem = document.createElement('div');
+            emblem.style.position = 'absolute';
+            emblem.style.top = '50%';
+            emblem.style.left = '50%';
+            emblem.style.transform = 'translate(-50%, -50%)';
+            emblem.style.width = '38px';
+            emblem.style.height = '38px';
+            emblem.style.borderRadius = '50%';
+            emblem.style.background = '#e21836';
+            emblem.style.display = 'flex';
+            emblem.style.alignItems = 'center';
+            emblem.style.justifyContent = 'center';
+            emblem.style.boxShadow = '0 2px 6px rgba(0,0,0,0.2)';
+            emblem.style.border = '2.5px solid #ffffff';
+            emblem.style.zIndex = '10';
+            emblem.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="#ffffff"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>';
+            container.appendChild(emblem);
         }
 
         if (load) load.classList.add('hidden');
